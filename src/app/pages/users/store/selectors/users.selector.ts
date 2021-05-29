@@ -7,3 +7,8 @@ export const getUsers = createSelector(
   getUsersFeature,
   (state: UsersState) => state.users
 );
+
+export const selectedUser = createSelector(
+  getUsersFeature,
+  (state: UsersState) => state.selectedUser
+);

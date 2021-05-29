@@ -10,7 +10,7 @@ import { UsersFacade } from './store/facades/users.facade';
 })
 export class UsersComponent implements OnInit {
   public usersList$: Observable<User[]> = this.usersFacade.users$;
-  public user: User = this.usersFacade.user;
+  public user$: Observable<User> = this.usersFacade.user$;
 
   constructor(
     private usersFacade: UsersFacade
@@ -21,18 +21,22 @@ export class UsersComponent implements OnInit {
   }
 
   public selectUser(user: User): void {
-    this.usersFacade.user = user;
+    this.usersFacade.pickUser(user);
   }
 
   public removeUser(userId: string): void {
     this.usersFacade.delete(userId);
   }
 
-  public submitUser(user: User): void {
-    this.usersFacade.addUser(user);
+  public submitUser(user: Partial<User>): void {
+    if (user._id) {
+      this.usersFacade.updateUser(user);
+    } else {
+      this.usersFacade.addUser(user);
+    }
   }
 
   public clearUser(): void {
-    this.usersFacade.user = null;
+    this.usersFacade.unPickUser();
   }
 }

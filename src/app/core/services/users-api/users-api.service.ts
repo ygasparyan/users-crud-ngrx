@@ -33,7 +33,7 @@ export class UsersApiService {
    * Add new user
    * @param user - added user
    */
-  public addUser(user: User): Observable<User> {
+  public addUser(user: Partial<User>): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/users`, user);
   }
 
@@ -41,7 +41,7 @@ export class UsersApiService {
    * Update user data
    * @param user - updated user
    */
-  public updateUser(user: any): Observable<User> {
+  public updateUser(user: Partial<User>): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/users`, user);
   }
 
