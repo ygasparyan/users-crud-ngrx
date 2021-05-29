@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatDialogModule
