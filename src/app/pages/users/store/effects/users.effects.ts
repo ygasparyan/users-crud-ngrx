@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
-import { UsersApiService } from '@services';
+import { map, catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { AlertService, UsersApiService } from '@services';
 import {
-  addUser,
+  addUser, addUserFailed,
   addUserSuccess,
-  deleteUser,
+  deleteUser, deleteUserFailed,
   deleteUserSuccess,
-  editUser, editUserSuccess,
-  getUsersList,
+  editUser, editUserFailed, editUserSuccess,
+  getUsersList, getUsersListFailed,
   getUsersListSuccess
 } from '../actions/users.actions';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ import { EMPTY } from 'rxjs';
 export class UsersEffects {
 
   constructor(private actions$: Actions,
-              private usersApiService: UsersApiService) {
+              private usersApiService: UsersApiService,
+              private alertService: AlertService) {
   }
 
   loadUsers$ = createEffect(() => this.actions$
@@ -28,7 +29,7 @@ export class UsersEffects {
       mergeMap(() => this.usersApiService.usersList()
         .pipe(
           map(users => getUsersListSuccess({users})),
-          catchError(error => EMPTY)
+          catchError(error => of(getUsersListFailed(error)))
         )
       )
     )
@@ -40,7 +41,7 @@ export class UsersEffects {
       switchMap(({user}) =>
         this.usersApiService.addUser(user).pipe(
           map(user => addUserSuccess({user})),
-          catchError(error => EMPTY)
+          catchError(error => of(addUserFailed(error)))
         )
       )
     )
@@ -52,7 +53,7 @@ export class UsersEffects {
       switchMap(({user}) =>
         this.usersApiService.updateUser(user).pipe(
           map(user => editUserSuccess({user})),
-          catchError(error => EMPTY)
+          catchError(error => of(editUserFailed))
         )
       )
     )
@@ -64,10 +65,26 @@ export class UsersEffects {
       switchMap(({userId}) =>
         this.usersApiService.removeUser(userId).pipe(
           map(() => deleteUserSuccess({userId})),
-          catchError(error => EMPTY)
+          catchError(error => of(deleteUserFailed))
         )
       )
     )
+  );
+
+  successNotification$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(editUserSuccess, addUserSuccess, deleteUserSuccess),
+        tap(() => this.alertService.openSnackBar('Success'))
+      ),
+    { dispatch: false }
+  );
+
+  errorNotification$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(editUserFailed, addUserFailed, deleteUserFailed),
+        tap(() => this.alertService.openSnackBar('Error'))
+      ),
+    { dispatch: false }
   );
 
 }
