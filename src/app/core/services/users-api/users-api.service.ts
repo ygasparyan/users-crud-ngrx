@@ -29,4 +29,28 @@ export class UsersApiService {
     return this.http.get<User>(`${this.apiUrl}/users/${userId}`);
   }
 
+  /**
+   * Add new user
+   * @param user - added user
+   */
+  public addUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/users`, user);
+  }
+
+  /**
+   * Update user data
+   * @param user - updated user
+   */
+  public updateUser(user: any): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/users`, user);
+  }
+
+  /**
+   * Remove user
+   * @param userId - id to delete
+   */
+  public removeUser(userId: string): Observable<User> {
+    return this.http.delete<User>((`${this.apiUrl}/users/${userId}`));
+  }
+
 }
