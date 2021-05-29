@@ -11,12 +11,17 @@ import { usersFeatureName, usersReducer } from './store/reducers/users.reducer';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersListComponent
+    UsersListComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +30,10 @@ import { MatButtonModule } from '@angular/material/button';
     EffectsModule.forFeature([UsersEffects]),
     MatListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class UsersModule {

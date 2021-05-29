@@ -34,7 +34,7 @@ export class UsersEffects {
     )
   );
 
-  addMovie$ = createEffect(() =>
+  addUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addUser),
       switchMap(({user}) =>

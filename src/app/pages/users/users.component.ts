@@ -10,6 +10,7 @@ import { UsersFacade } from './store/facades/users.facade';
 })
 export class UsersComponent implements OnInit {
   public usersList$: Observable<User[]> = this.usersFacade.users$;
+  public user: User = this.usersFacade.user;
 
   constructor(
     private usersFacade: UsersFacade
@@ -27,5 +28,11 @@ export class UsersComponent implements OnInit {
     // this.usersFacade.delete(userId);
   }
 
+  public submitUser(user: User): void {
+    this.usersFacade.addUser(user);
+  }
 
+  public clearUser(): void {
+    this.usersFacade.user = null;
+  }
 }

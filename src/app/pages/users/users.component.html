@@ -2,3 +2,8 @@
   [users]="usersList$ | async"
   (selectUser)="selectUser($event)"
 ></app-users-list>
+<app-user-edit
+  [user]="user"
+  (submitUser)="submitUser($event)"
+  (clearUser)="clearUser()">
+</app-user-edit>
