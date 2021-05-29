@@ -10,15 +10,14 @@ import { User } from '@models';
 export class UsersListComponent {
   @Input() users: User[];
   @Output() selectUser: EventEmitter<User> = new EventEmitter();
-  @Output() removeUser: EventEmitter<string> = new EventEmitter();
+  @Output() clearUser: EventEmitter<null> = new EventEmitter();
 
   public clickUser(user: User): void {
     this.selectUser.emit(user);
   }
 
-  public clickDelete(event: MouseEvent, userId: string): void {
-    event.preventDefault();
-    this.removeUser.emit(userId);
+  public createUser(): void {
+    this.clearUser.emit();
   }
 
 }

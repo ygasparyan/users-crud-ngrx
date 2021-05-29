@@ -9,7 +9,7 @@ import {
   deleteUserSuccess,
   editUser, editUserFailed, editUserSuccess,
   getUsersList, getUsersListFailed,
-  getUsersListSuccess
+  getUsersListSuccess, unPickUser
 } from '../actions/users.actions';
 import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class UsersEffects {
   loadUsers$ = createEffect(() => this.actions$
     .pipe(
       ofType(getUsersList),
-      mergeMap(() => this.usersApiService.usersList()
+      switchMap(() => this.usersApiService.usersList()
         .pipe(
           map(users => getUsersListSuccess({users})),
           catchError(error => of(getUsersListFailed(error)))
@@ -96,8 +96,13 @@ export class UsersEffects {
       .afterClosed()
       .pipe(
         filter(confirm => confirm),
-        map(() => {return deleteUser({ userId });
-      })))
+        map(() => deleteUser({ userId })
+      )))
+  ));
+
+  userDataUpdate$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteUserSuccess, addUserFailed, editUserSuccess),
+    map(() => unPickUser())
   ));
 
 }
