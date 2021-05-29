@@ -24,8 +24,8 @@ export class UsersComponent implements OnInit {
     this.usersFacade.user = user;
   }
 
-  public delete(userId: string): void {
-    // this.usersFacade.delete(userId);
+  public removeUser(userId: string): void {
+    this.usersFacade.delete(userId);
   }
 
   public submitUser(user: User): void {

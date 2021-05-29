@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { User } from '@models';
 import { UsersState } from '../reducers/users.reducer';
-import { addUser, deleteUser, getUsersList } from '../actions/users.actions';
+import { addUser, deleteUserConfirm, getUsersList } from '../actions/users.actions';
 import { getUsers } from '../selectors/users.selector';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class UsersFacade {
   }
 
   public delete(userId: string): void {
-    this.store.dispatch(deleteUser({ userId }));
+    this.store.dispatch(deleteUserConfirm({ userId }));
   }
 
   public addUser(user: User): void {

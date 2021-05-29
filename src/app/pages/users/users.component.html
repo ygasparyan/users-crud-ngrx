@@ -1,6 +1,7 @@
 <app-users-list
   [users]="usersList$ | async"
   (selectUser)="selectUser($event)"
+  (removeUser)="removeUser($event)"
 ></app-users-list>
 <app-user-edit
   [user]="user"

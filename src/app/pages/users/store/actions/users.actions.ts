@@ -25,3 +25,4 @@ export const editUserFailed = createAction('[Users] Edit user failed', (error: E
 export const deleteUser = createAction('[Users] Delete user', props<{ userId: string }>());
 export const deleteUserSuccess = createAction('[Users] Delete user success', props<{ userId: string }>());
 export const deleteUserFailed = createAction('[Users] Delete user failed', (error: Error) => ({ error }));
+export const deleteUserConfirm = createAction('[Users] Confirm delete', props<{ userId: string }>());

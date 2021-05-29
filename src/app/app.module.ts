@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

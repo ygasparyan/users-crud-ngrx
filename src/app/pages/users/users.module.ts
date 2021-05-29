@@ -15,6 +15,7 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,6 @@ import { MatInputModule } from '@angular/material/input';
     UserEditComponent
   ],
   imports: [
-    CommonModule,
     UsersRoutingModule,
     StoreModule.forFeature(usersFeatureName, usersReducer),
     EffectsModule.forFeature([UsersEffects]),
@@ -33,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    SharedModule
   ]
 })
 export class UsersModule {
