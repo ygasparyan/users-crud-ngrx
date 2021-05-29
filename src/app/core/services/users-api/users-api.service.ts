@@ -42,7 +42,7 @@ export class UsersApiService {
    * @param user - updated user
    */
   public updateUser(user: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users`, user);
+    return this.http.put<User>(`${this.apiUrl}/users/${user._id}`, user);
   }
 
   /**
