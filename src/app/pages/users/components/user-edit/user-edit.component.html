@@ -1,29 +1,32 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email">
-  </mat-form-field>
-  <ng-container formGroupName="address">
+<div class="container">
+  <h4>Users List</h4>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>City</mat-label>
-      <input matInput formControlName="city">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Street</mat-label>
-      <input matInput formControlName="street">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
     </mat-form-field>
-  </ng-container>
-  <ng-container formArrayName="phones">
-    <mat-form-field *ngFor="let phone of phones.controls; let i = index">
-      <mat-label>Phone {{i}}</mat-label>
-      <input matInput [formControlName]="i">
-    </mat-form-field>
-  </ng-container>
-<!--    <button (click)="closeEditMode()" *ngIf="this.movie" mat-raised-button type="button" color="warn">Close edit mode</button>-->
-  <button mat-raised-button type="submit" color="primary">{{ user ? 'Edit user' : 'Add user' }}</button>
+    <ng-container formGroupName="address">
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Street</mat-label>
+        <input matInput formControlName="street">
+      </mat-form-field>
+    </ng-container>
+    <ng-container formArrayName="phones">
+      <mat-form-field *ngFor="let phone of phones.controls; let i = index">
+        <mat-label>Phone {{i}}</mat-label>
+        <input matInput [formControlName]="i">
+      </mat-form-field>
+    </ng-container>
+    <!--    <button (click)="closeEditMode()" *ngIf="this.movie" mat-raised-button type="button" color="warn">Close edit mode</button>-->
+    <button mat-raised-button type="submit" color="primary">{{ user ? 'Edit user' : 'Add user' }}</button>
 
-</form>
+  </form>
+</div>

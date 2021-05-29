@@ -1,10 +1,18 @@
-<app-users-list
-  [users]="usersList$ | async"
-  (selectUser)="selectUser($event)"
-  (removeUser)="removeUser($event)"
-></app-users-list>
-<app-user-edit
-  [user]="user"
-  (submitUser)="submitUser($event)"
-  (clearUser)="clearUser()">
-</app-user-edit>
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <app-users-list
+        [users]="usersList$ | async"
+        (selectUser)="selectUser($event)"
+        (removeUser)="removeUser($event)"
+      ></app-users-list>
+    </div>
+    <div class="col-12 col-sm-6">
+      <app-user-edit
+        [user]="user$ | async"
+        (submitUser)="submitUser($event)"
+        (clearUser)="clearUser()">
+      </app-user-edit>
+    </div>
+  </div>
+</div>
