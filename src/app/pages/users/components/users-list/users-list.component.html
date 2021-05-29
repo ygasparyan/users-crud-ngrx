@@ -1,0 +1,8 @@
+<mat-action-list>
+  <mat-list-item *ngFor="let user of users" (click)="clickUser(user)">
+    {{user.name}}
+    <button mat-icon-button (click)="clickDelete($event, user._id)">
+      <mat-icon class="mat-24">delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-action-list>

@@ -1,5 +1,4 @@
-<ul>
-  <li *ngFor="let user of usersList$ | async">
-    {{ user | json}}
-  </li>
-</ul>
+<app-users-list
+  [users]="usersList$ | async"
+  (selectUser)="selectUser($event)"
+></app-users-list>

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@models';
-import { getUsersList } from './store/actions/users.actions';
-import { Store } from '@ngrx/store';
-import { getUsers } from './store/selectors/users.selector';
+import { UsersFacade } from './store/facades/users.facade';
 
 @Component({
   selector: 'app-users',
@@ -11,14 +9,23 @@ import { getUsers } from './store/selectors/users.selector';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  public usersList$: Observable<User[]> = this.store.select(getUsers);
+  public usersList$: Observable<User[]> = this.usersFacade.users$;
 
   constructor(
-    private store: Store
+    private usersFacade: UsersFacade
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(getUsersList());
+    this.usersFacade.getList();
   }
+
+  public selectUser(user: User): void {
+    this.usersFacade.user = user;
+  }
+
+  public delete(userId: string): void {
+    // this.usersFacade.delete(userId);
+  }
+
 
 }
