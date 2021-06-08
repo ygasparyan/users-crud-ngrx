@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@models';
+import { environment } from '@env';
+const { emailRegex, phoneRegex } = environment;
 
 @Component({
   selector: 'app-user-edit',
@@ -16,13 +18,15 @@ export class UserEditComponent implements OnChanges {
 
   public userForm = new FormGroup({
     _id: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.pattern(emailRegex)]),
     address: new FormGroup({
-      street: new FormControl(''),
-      city: new FormControl('')
+      street: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required)
     }),
-    phones: new FormArray([new FormControl()])
+    phones: new FormArray([new FormControl('', [Validators.required, Validators.pattern(
+      phoneRegex
+    )])])
   });
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,7 +54,7 @@ export class UserEditComponent implements OnChanges {
   }
 
   public addPhone(): void {
-    this.phones.push(new FormControl());
+    this.phones.push(new FormControl('', [Validators.required]));
   }
 
   public removePhone(i: number): void {
